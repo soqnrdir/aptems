@@ -58,10 +58,10 @@
                   </a>
                 </li>
                 <li class="page-item" :class="activeOn1" @click="activeSet(pageDefaultNum1)"><a class="page-link" href="#">{{pageDefaultNum1}}</a></li>
-                <li v-if="exdata > pageDefaultNum1 * 10" class="page-item" :class="activeOn2" @click="activeSet(pageDefaultNum2)"><a class="page-link" href="#">{{pageDefaultNum2}}</a></li>
-                <li v-if="exdata > pageDefaultNum2 * 10" class="page-item" :class="activeOn3" @click="activeSet(pageDefaultNum3)"><a class="page-link" href="#">{{pageDefaultNum3}}</a></li>
-                <li v-if="exdata > pageDefaultNum3 * 10" class="page-item" :class="activeOn4" @click="activeSet(pageDefaultNum4)"><a class="page-link" href="#">{{pageDefaultNum4}}</a></li>
-                <li v-if="exdata > pageDefaultNum4 * 10" class="page-item" :class="activeOn5" @click="activeSet(pageDefaultNum5)"><a class="page-link" href="#">{{pageDefaultNum5}}</a></li>
+                <li v-if="table.data.length > pageDefaultNum1 * 10" class="page-item" :class="activeOn2" @click="activeSet(pageDefaultNum2)"><a class="page-link" href="#">{{pageDefaultNum2}}</a></li>
+                <li v-if="table.data.length > pageDefaultNum2 * 10" class="page-item" :class="activeOn3" @click="activeSet(pageDefaultNum3)"><a class="page-link" href="#">{{pageDefaultNum3}}</a></li>
+                <li v-if="table.data.length > pageDefaultNum3 * 10" class="page-item" :class="activeOn4" @click="activeSet(pageDefaultNum4)"><a class="page-link" href="#">{{pageDefaultNum4}}</a></li>
+                <li v-if="table.data.length > pageDefaultNum4 * 10" class="page-item" :class="activeOn5" @click="activeSet(pageDefaultNum5)"><a class="page-link" href="#">{{pageDefaultNum5}}</a></li>
                 <li class="page-item">
                   <a class="page-link" href="#" @click="nextPage" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -279,7 +279,6 @@ export default {
         telephone: '',
         auth: ''
       },
-      exdata: 11,
       pageDefaultNum1: 1,
       pageDefaultNum2: 2,
       pageDefaultNum3: 3,
@@ -337,7 +336,7 @@ export default {
       }
     },
     nextPage () {
-      let tableLen = this.exdata
+      let tableLen = this.table.data.length
       if (tableLen > this.pageDefaultNum5 * 10) {
         this.pageDefaultNum1 = this.pageDefaultNum1 + 5
         this.pageDefaultNum2 = this.pageDefaultNum2 + 5
@@ -374,10 +373,14 @@ export default {
           }
         }
 
-        tableLen = tableLen / 10
-        tableLen = parseInt(tableLen)
+        let pageNum = 0
+        if (tableLen > 10) {
+          tableLen = tableLen / 10
+          tableLen = parseInt(tableLen)
+          pageNum += tableLen
+        }
 
-        this.pageNum = tableLen
+        this.pageNum = pageNum
         this.startIndex = this.pageNum * this.pageSize
         this.endIndex = this.startIndex + this.pageSize
 
@@ -559,6 +562,46 @@ export default {
         }
         alert('삭제되었습니다.')
         this.$refs.closeModal.click()
+        let tableLen = this.table.data.length
+
+        this.activeOn1 = ''
+        this.activeOn2 = ''
+        this.activeOn3 = ''
+        this.activeOn4 = ''
+        this.activeOn5 = ''
+
+        let paging = 1
+        if (tableLen > 10) {
+          paging = tableLen / 10
+          paging = parseInt(paging)
+          paging += 1
+          if (paging > 5) {
+            paging = paging % 5
+          }
+        }
+
+        let pageNum = 0
+        if (tableLen > 10) {
+          tableLen = tableLen / 10
+          tableLen = parseInt(tableLen)
+          pageNum += tableLen
+        }
+
+        this.pageNum = pageNum
+        this.startIndex = this.pageNum * this.pageSize
+        this.endIndex = this.startIndex + this.pageSize
+
+        if (paging === 1) {
+          this.activeOn1 = 'active'
+        } else if (paging === 2) {
+          this.activeOn2 = 'active'
+        } else if (paging === 3) {
+          this.activeOn3 = 'active'
+        } else if (paging === 4) {
+          this.activeOn4 = 'active'
+        } else {
+          this.activeOn5 = 'active'
+        }
       }
     }
   },
