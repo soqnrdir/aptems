@@ -10,7 +10,7 @@
           </button>
         </div>
       </div>
-      <div class="card h-300 mt-1">
+      <div class="card">
         <div class="card-body">
           <div class="row">
               <table class="table">
