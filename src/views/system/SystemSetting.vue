@@ -31,9 +31,9 @@
             <h5 class="card-title fw-bold mt-2">전력 설정</h5>
           </div>
           <div class="card-body">
-            <div class="row fs-3">
+            <div class="row fs-4">
               <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:170px">계약 전력 용량 : </h5>
-              <div class="col-3">
+              <div class="col-2">
                 <input type="text" v-model="data.contratPower" :readonly="readonly2" class="form-control">
               </div>
               <button v-if="updated2 == 'on'" type="button" class="btn btn-danger ms-auto" style="flex-basis:60px;" @click="clickCancel2">취소</button>
@@ -98,6 +98,7 @@ export default {
         emplacement: '1차아파트',
         manager: '홍길동',
         contratPower: '8,000kWh',
+        setDate: '',
         drServerAdd: '1.234.567.89'
       }
     }
@@ -140,6 +141,21 @@ export default {
       this.readonly2 = true
       this.dateDisabled = true
       this.datebg = '#e9ecef'
+
+      const setYear = this.nowsday.getFullYear()
+      let setMonth = this.nowsday.getMonth() + 1
+      if (setMonth < 10) {
+        setMonth = '0' + setMonth
+      }
+      let setDay = this.nowsday.getDay()
+      if (setDay < 10) {
+        setDay = '0' + setDay
+      }
+
+      let setDate = ''
+      setDate = setYear + '-' + setMonth + '-' + setDay
+      this.setDate = setDate
+      console.log(setDate)
     },
     clickSave3 () {
       this.updated3 = 'off'

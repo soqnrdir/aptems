@@ -3,15 +3,15 @@
   <div class="row">
     <div class="col-md-12">
       <h5 class="fw-bold text-start">사용자관리</h5>
-      <div class="row">
+      <div class="card mt-5">
+        <div class="card-body">
+          <div class="row">
         <div class="text-end">
           <button type="button" class="btn btn-info btn-fill" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
             사용자등록
           </button>
         </div>
       </div>
-      <div class="card">
-        <div class="card-body">
           <div class="row">
               <table class="table">
                   <thead>
