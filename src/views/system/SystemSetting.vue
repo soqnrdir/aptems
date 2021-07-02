@@ -151,11 +151,9 @@ export default {
       if (setDay < 10) {
         setDay = '0' + setDay
       }
-
       let setDate = ''
       setDate = setYear + '-' + setMonth + '-' + setDay
       this.setDate = setDate
-      console.log(setDate)
     },
     clickSave3 () {
       this.updated3 = 'off'

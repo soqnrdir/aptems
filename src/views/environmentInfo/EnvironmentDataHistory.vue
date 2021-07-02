@@ -19,7 +19,7 @@
             <div class="col-2">
               <datepicker class="form-control bg-white" v-model="nowsday"/>
             </div>
-            <button type="button" class="btn btn-info" style="flex-basis:60px;" @click="clickSearch">검색</button>
+            <button type="button" class="btn btn-info text-white" style="flex-basis:60px;" @click="clickSearch">검색</button>
           </div>
           <div class="row">
             <table class="table">

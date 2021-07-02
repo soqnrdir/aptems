@@ -267,14 +267,12 @@ export default {
       ]
       chartRef.value.update()
     }
-    console.log(updateChart)
     const beforeRenderLogic = (event) => {
       // ...
       // if(a === b) {
       //  event.preventDefault()
       // }
     }
-
     return {
       LineChart,
       updateChart,

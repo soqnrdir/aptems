@@ -15,7 +15,7 @@
             <div class="col-2">
               <datepicker class="form-control bg-white" v-model="nowsday"/>
             </div>
-            <button type="button" class="btn btn-info ms-auto me-3" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
+            <button type="button" class="btn btn-info ms-auto me-3 text-white" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
           </div>
           <div class="row justify-content-center">
             <div class="col-8">
@@ -180,7 +180,6 @@ export default {
       ]
       chartRef.value.update()
     }
-    console.log(updateChart)
     const beforeRenderLogic = (event) => {
       // ...
       // if(a === b) {

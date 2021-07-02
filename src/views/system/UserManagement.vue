@@ -7,7 +7,7 @@
         <div class="card-body">
           <div class="row">
         <div class="text-end">
-          <button type="button" class="btn btn-info btn-fill" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
+          <button type="button" class="btn btn-info btn-fill text-white" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
             사용자등록
           </button>
         </div>
@@ -570,37 +570,41 @@ export default {
         this.activeOn4 = ''
         this.activeOn5 = ''
 
-        let paging = 1
-        if (tableLen > 10) {
-          paging = tableLen / 10
-          paging = parseInt(paging)
-          paging += 1
-          if (paging > 5) {
-            paging = paging % 5
+        if (this.pageNum !== 0) {
+          let paging = 1
+          if (tableLen > 10) {
+            paging = tableLen / 10
+            paging = parseInt(paging)
+            paging += 1
+            if (paging > 5) {
+              paging = paging % 5
+            }
           }
-        }
 
-        let pageNum = 0
-        if (tableLen > 10) {
-          tableLen = tableLen / 10
-          tableLen = parseInt(tableLen)
-          pageNum += tableLen
-        }
+          let pageNum = 0
+          if (tableLen > 10) {
+            tableLen = tableLen / 10
+            tableLen = parseInt(tableLen)
+            pageNum += tableLen
+          }
 
-        this.pageNum = pageNum
-        this.startIndex = this.pageNum * this.pageSize
-        this.endIndex = this.startIndex + this.pageSize
+          this.pageNum = pageNum
+          this.startIndex = this.pageNum * this.pageSize
+          this.endIndex = this.startIndex + this.pageSize
 
-        if (paging === 1) {
-          this.activeOn1 = 'active'
-        } else if (paging === 2) {
-          this.activeOn2 = 'active'
-        } else if (paging === 3) {
-          this.activeOn3 = 'active'
-        } else if (paging === 4) {
-          this.activeOn4 = 'active'
+          if (paging === 1) {
+            this.activeOn1 = 'active'
+          } else if (paging === 2) {
+            this.activeOn2 = 'active'
+          } else if (paging === 3) {
+            this.activeOn3 = 'active'
+          } else if (paging === 4) {
+            this.activeOn4 = 'active'
+          } else {
+            this.activeOn5 = 'active'
+          }
         } else {
-          this.activeOn5 = 'active'
+          this.activeOn1 = 'active'
         }
       }
     }
