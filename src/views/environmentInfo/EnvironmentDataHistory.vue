@@ -5,26 +5,22 @@
       <h5 class="fw-bold text-start">환경데이터 이력</h5>
       <div class="card mt-5">
         <div class="card-body">
-           <div class="row ">
-              <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:120px">센서이름</h5>
-              <div class="col-2">
-                <select class="form-control" id="auth-text">
-                  <option selected value="DHT11">DHT11</option>
-                  <option value="ABCT1">ABCT1</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <datepicker :disabled="dateDisabled" :style="{ backgroundColor: datebg }" class="form-control"
-                  v-model="nowsday"
-                />
-              </div> ~
-              <div class="col-2">
-                <datepicker :disabled="dateDisabled" :style="{ backgroundColor: datebg }" class="form-control"
-                  v-model="nowsday"
-                />
-              </div>
-              <button type="button" class="btn btn-info" style="flex-basis:60px;" @click="clickSearch">검색</button>
+          <div class="row">
+            <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:120px">센서이름</h5>
+            <div class="col-2">
+              <select class="form-select" id="auth-text">
+                <option selected value="DHT11">DHT11</option>
+                <option value="ABCT1">ABCT1</option>
+              </select>
             </div>
+            <div class="col-2">
+              <datepicker class="form-control bg-white" v-model="nowsday"/>
+            </div>&#8275;
+            <div class="col-2">
+              <datepicker class="form-control bg-white" v-model="nowsday"/>
+            </div>
+            <button type="button" class="btn btn-info" style="flex-basis:60px;" @click="clickSearch">검색</button>
+          </div>
           <div class="row">
             <table class="table">
               <colgroup>

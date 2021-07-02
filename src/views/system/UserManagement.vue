@@ -100,7 +100,7 @@
                   </div>
                   <div class="mb-3">
                       <label for="auth-text" class="col-form-label">권한:</label>
-                      <select class="form-control" v-model="userData.auth" id="auth-text">
+                      <select class="form-select" v-model="userData.auth" id="auth-text">
                         <option selected value="관리자">관리자</option>
                         <option value="사용자">사용자</option>
                       </select>
