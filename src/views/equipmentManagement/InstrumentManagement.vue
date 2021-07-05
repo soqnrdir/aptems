@@ -20,6 +20,7 @@
                   <col width = "13%">
                   <col width = "13%">
                   <col width = "13%">
+                  <col width = "13%">
                   <col />
                 </colgroup>
                   <thead>
