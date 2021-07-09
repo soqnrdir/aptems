@@ -15,6 +15,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarEnergyMonitering">
                 <li><router-link class="nav-link dropdown-item" to="/powerconsumption">설비별전력사용량</router-link></li>
                 <li><router-link class="nav-link dropdown-item" style="font-size:0.98em" to="/liveLoadMonitering">실시간부하모니터링</router-link></li>
+                <li><router-link class="nav-link dropdown-item" to="/electricityUsage">월별전기사용량</router-link></li>
                 <li><router-link class="nav-link dropdown-item" to="/energyCostMonth">월별에너지비용</router-link></li>
                 <li><router-link class="nav-link dropdown-item" to="/facilityControl">설비제어</router-link></li>
               </ul>

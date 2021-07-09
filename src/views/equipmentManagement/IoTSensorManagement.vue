@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h5 class="fw-bold text-start">IoT센서관리</h5>
+      <h5 class="fw-bold text-start">IoT센서 관리</h5>
       <div class="card mt-5">
         <div class="card-body">
           <div class="row">
@@ -15,11 +15,11 @@
           <div class="row">
               <table class="table">
                 <colgroup>
-                  <col width = "13%">
-                  <col width = "13%">
-                  <col width = "13%">
-                  <col width = "13%">
-                  <col width = "13%">
+                  <col width = "14%">
+                  <col width = "14%">
+                  <col width = "14%">
+                  <col width = "14%">
+                  <col width = "14%">
                   <col />
                 </colgroup>
                   <thead>
@@ -29,13 +29,12 @@
                   </thead>
                   <tbody v-if="table.data.length != 0">
                     <tr v-for="(item, index) in paginatedData" :key="index" >
-                      <td>{{item.controlNo}}</td>
-                      <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.instrumentNm}}</td>
-                      <td>{{item.deviceAdd}}</td>
+                      <td>{{item.sensorType}}</td>
+                      <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.sensorNm}}</td>
+                      <td>{{item.emplacement}}</td>
                       <td>{{item.regDate}}</td>
-                      <td>{{item.modelNm}}</td>
-                      <td>{{item.communicationStatus}}</td>
-                      <td>{{item.measurementTarget}}</td>
+                      <td>{{item.ipAdd}}</td>
+                      <td>{{item.etc}}</td>
                     </tr>
                   </tbody>
                   <tbody v-if="table.data.length == 0">
@@ -79,35 +78,24 @@
               <div class="modal-body text-start">
                 <form>
                   <div class="mb-3">
-                      <label for="id-text" class="col-form-label">관리번호:</label>
-                      <input type="text" class="form-control" v-model="userData.controlNo" id="id-text">
+                      <label for="id-text" class="col-form-label">센서종류:</label>
+                      <input type="text" class="form-control" v-model="userData.sensorType" id="id-text">
                   </div>
                   <div class="mb-3">
-                      <label for="name-text" class="col-form-label">계측기명:</label>
-                      <input type="text" class="form-control" v-model="userData.instrumentNm" id="name-text">
+                      <label for="name-text" class="col-form-label">센서명:</label>
+                      <input type="text" class="form-control" v-model="userData.sensorNm" id="name-text">
                   </div>
                   <div class="mb-3">
-                      <label for="company-text" class="col-form-label">장치주소:</label>
-                      <input type="text" class="form-control" v-model="userData.deviceAdd" id="company-text">
+                      <label for="company-text" class="col-form-label">설치위치:</label>
+                      <input type="text" class="form-control" v-model="userData.emplacement" id="company-text">
                   </div>
                   <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">모델명:</label>
-                      <input type="text" class="form-control" v-model="userData.modelNm" id="telephone-text">
+                      <label for="telephone-text" class="col-form-label">IP주소:</label>
+                      <input type="text" class="form-control" v-model="userData.ipAdd" id="telephone-text">
                   </div>
                   <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">통신상태:</label>
-                      <input type="text" class="form-control" v-model="userData.communicationStatus" id="telephone-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">설치장소:</label>
-                      <input type="text" class="form-control" v-model="userData.emplacement" id="telephone-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="auth-text" class="col-form-label">계측대상:</label>
-                      <select class="form-select" v-model="userData.measurementTarget" id="auth-text">
-                        <option selected value="지하주차장 조명">지하주차장 조명</option>
-                        <option value="엘리베이터 조명">엘리베이터 조명</option>
-                      </select>
+                      <label for="telephone-text" class="col-form-label">비고:</label>
+                      <input type="text" class="form-control" v-model="userData.etc" id="telephone-text">
                   </div>
                 </form>
               </div>
@@ -126,116 +114,110 @@
 </template>
 
 <script>
-const tableColumns = ['관리번호', '계측기명', '장치주소', '설치날짜', '모델명', '통신상태', '계측대상']
+const tableColumns = ['센서종류', '센서명', '설치위치', '설치날짜', 'IP주소', '내용']
 const tableData = [{
-  controlNo: 'A-001',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM1',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-002',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM2',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-003',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM3',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-004',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM4',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-005',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM5',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-006',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM6',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-007',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM7',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-008',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM8',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-009',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM9',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-010',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM10',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 },
 {
-  controlNo: 'A-011',
-  instrumentNm: '광선계측기',
-  deviceAdd: '1.234.567.89',
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM11',
+  emplacement: '관리소',
   regDate: '2021-05-28',
-  modelNm: 'KDX-200',
-  communicationStatus: '정상',
-  emplacement: '지하주차장',
-  measurementTarget: '지하주차장 조명'
+  ipAdd: '1.234.567.89',
+  etc: '점검'
+},
+{
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM12',
+  emplacement: '관리소',
+  regDate: '2021-05-28',
+  ipAdd: '1.234.567.89',
+  etc: '점검'
+},
+{
+  sensorType: '온도센서',
+  sensorNm: 'NS-TDSM13',
+  emplacement: '관리소',
+  regDate: '2021-05-28',
+  ipAdd: '1.234.567.89',
+  etc: '점검'
 }]
 
 export default {
@@ -261,13 +243,11 @@ export default {
       userPopUorR: true,
       userData: {
         index: null,
-        controlNo: '',
-        instrumentNm: '',
-        deviceAdd: '',
-        modelNm: '',
-        communicationStatus: '',
+        sensorType: '',
+        sensorNm: '',
         emplacement: '',
-        measurementTarget: ''
+        ipAdd: '',
+        etc: ''
       },
       pageDefaultNum1: 1,
       pageDefaultNum2: 2,
@@ -426,13 +406,11 @@ export default {
       this.validated = 1
       this.userPopUorR = true
 
-      this.userData.controlNo = ''
-      this.userData.instrumentNm = ''
-      this.userData.deviceAdd = ''
-      this.userData.modelNm = ''
-      this.userData.communicationStatus = ''
+      this.userData.sensorType = ''
+      this.userData.sensorNm = ''
       this.userData.emplacement = ''
-      this.userData.measurementTarget = '지하주차장 조명'
+      this.userData.ipAdd = ''
+      this.userData.etc = ''
     },
     userPopU (item, index) {
       this.userPopTitle = '수정'
@@ -441,37 +419,31 @@ export default {
 
       index = this.startIndex + index
       this.userData.index = index
-      this.userData.controlNo = item.controlNo
-      this.userData.instrumentNm = item.instrumentNm
-      this.userData.deviceAdd = item.deviceAdd
-      this.userData.modelNm = item.modelNm
-      this.userData.communicationStatus = item.communicationStatus
+      this.userData.sensorType = item.sensorType
+      this.userData.sensorNm = item.sensorNm
       this.userData.emplacement = item.emplacement
-      this.userData.measurementTarget = item.measurementTarget
+      this.userData.ipAdd = item.ipAdd
+      this.userData.etc = item.etc
     },
     clickInsert () {
-      if (this.userData.controlNo == null || this.userData.controlNo === '') {
-        alert('관리번호를 입력해주세요.')
+      if (this.userData.sensorType == null || this.userData.sensorType === '') {
+        alert('센서종류를 입력해주세요.')
         return
       }
-      if (this.userData.instrumentNm == null || this.userData.instrumentNm === '') {
-        alert('계측기명을 입력해주세요.')
-        return
-      }
-      if (this.userData.deviceAdd == null || this.userData.deviceAdd === '') {
-        alert('장치주소를 입력해주세요.')
-        return
-      }
-      if (this.userData.modelNm == null || this.userData.modelNm === '') {
-        alert('모델명을 입력해주세요.')
-        return
-      }
-      if (this.userData.communicationStatus == null || this.userData.communicationStatus === '') {
-        alert('통신장치를 입력해주세요.')
+      if (this.userData.sensorNm == null || this.userData.sensorNm === '') {
+        alert('센서명을 입력해주세요.')
         return
       }
       if (this.userData.emplacement == null || this.userData.emplacement === '') {
-        alert('설치장소를 입력해주세요.')
+        alert('설치위치를 입력해주세요.')
+        return
+      }
+      if (this.userData.ipAdd == null || this.userData.ipAdd === '') {
+        alert('IP주소를 입력해주세요.')
+        return
+      }
+      if (this.userData.etc == null || this.userData.etc === '') {
+        alert('내용을 입력해주세요.')
         return
       }
 
@@ -487,54 +459,46 @@ export default {
         const nowsday = year + '-' + month + '-' + date
 
         this.table.data.push({
-          controlNo: this.userData.controlNo,
-          instrumentNm: this.userData.instrumentNm,
-          deviceAdd: this.userData.deviceAdd,
-          regDate: nowsday,
-          modelNm: this.userData.modelNm,
-          communicationStatus: this.userData.communicationStatus,
+          sensorType: this.userData.sensorType,
+          sensorNm: this.userData.sensorNm,
           emplacement: this.userData.emplacement,
-          measurementTarget: this.userData.measurementTarget
+          regDate: nowsday,
+          ipAdd: this.userData.ipAdd,
+          etc: this.userData.etc
         })
         alert('등록되었습니다.')
         this.$refs.closeModal.click()
       }
     },
     clickUpdate () {
-      if (this.userData.controlNo == null || this.userData.controlNo === '') {
-        alert('관리번호를 입력해주세요.')
+      if (this.userData.sensorType == null || this.userData.sensorType === '') {
+        alert('센서종류를 입력해주세요.')
         return
       }
-      if (this.userData.instrumentNm == null || this.userData.instrumentNm === '') {
-        alert('계측기명을 입력해주세요.')
-        return
-      }
-      if (this.userData.deviceAdd == null || this.userData.deviceAdd === '') {
-        alert('장치주소를 입력해주세요.')
-        return
-      }
-      if (this.userData.modelNm == null || this.userData.modelNm === '') {
-        alert('모델명을 입력해주세요.')
-        return
-      }
-      if (this.userData.communicationStatus == null || this.userData.communicationStatus === '') {
-        alert('통신장치를 입력해주세요.')
+      if (this.userData.sensorNm == null || this.userData.sensorNm === '') {
+        alert('센서명을 입력해주세요.')
         return
       }
       if (this.userData.emplacement == null || this.userData.emplacement === '') {
-        alert('설치장소를 입력해주세요.')
+        alert('설치위치를 입력해주세요.')
+        return
+      }
+      if (this.userData.ipAdd == null || this.userData.ipAdd === '') {
+        alert('IP주소를 입력해주세요.')
+        return
+      }
+      if (this.userData.etc == null || this.userData.etc === '') {
+        alert('내용을 입력해주세요.')
         return
       }
 
       var updated = confirm('해당 항목을 수정하시겠습니까?')
       if (updated === true) {
-        this.table.data[this.userData.index].controlNo = this.userData.controlNo
-        this.table.data[this.userData.index].instrumentNm = this.userData.instrumentNm
-        this.table.data[this.userData.index].deviceAdd = this.userData.deviceAdd
-        this.table.data[this.userData.index].modelNm = this.userData.modelNm
-        this.table.data[this.userData.index].communicationStatus = this.userData.communicationStatus
+        this.table.data[this.userData.index].sensorType = this.userData.sensorType
+        this.table.data[this.userData.index].sensorNm = this.userData.sensorNm
         this.table.data[this.userData.index].emplacement = this.userData.emplacement
-        this.table.data[this.userData.index].measurementTarget = this.userData.measurementTarget
+        this.table.data[this.userData.index].ipAdd = this.userData.ipAdd
+        this.table.data[this.userData.index].etc = this.userData.etc
 
         alert('수정되었습니다.')
         this.$refs.closeModal.click()

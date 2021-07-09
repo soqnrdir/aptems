@@ -83,7 +83,8 @@ export default {
   data () {
     return {
       // nowsday: ref(new Date()),
-      nowsday: ref(new Date()),
+      nowsday: ref(new Date('2021-01-20')),
+      // 데이터 변경 시 new Date('원하는 일자')
       updated1: 'off',
       updated2: 'off',
       updated3: 'off',

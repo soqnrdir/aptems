@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h5 class="fw-bold text-start">사용자관리</h5>
+      <h5 class="fw-bold text-start">사용자 관리</h5>
       <div class="card mt-5">
         <div class="card-body">
           <div class="row">

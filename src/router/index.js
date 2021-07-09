@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 
 import Powerconsumption from '../views/energyMonitering/Powerconsumption.vue'
 import LiveLoadMonitering from '../views/energyMonitering/LiveLoadMonitering.vue'
+import ElectricityUsage from '../views/energyMonitering/ElectricityUsage.vue'
 import EnergyCostMonth from '../views/energyMonitering/EnergyCostMonth.vue'
 import FacilityControl from '../views/energyMonitering/FacilityControl.vue'
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/liveLoadMonitering',
     name: 'LiveLoadMonitering',
     component: LiveLoadMonitering
+  },
+  {
+    path: '/electricityUsage',
+    name: 'ElectricityUsage',
+    component: ElectricityUsage
   },
   {
     path: '/energyCostMonth',

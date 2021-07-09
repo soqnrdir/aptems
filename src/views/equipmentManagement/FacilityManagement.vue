@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h5 class="fw-bold text-start">설비관리</h5>
+      <h5 class="fw-bold text-start">설비 관리</h5>
       <div class="card mt-5">
         <div class="card-body">
           <div class="row">
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-const tableColumns = ['관리번호', '설비명', '설치위치', '등록일', '비고']
+const tableColumns = ['관리번호', '설비명', '설치위치', '등록일', '내용']
 const tableData = [{
   controlNo: 'P001',
   equipmentNm: '지하주차장 조명',
