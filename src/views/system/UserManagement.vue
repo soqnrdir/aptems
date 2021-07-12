@@ -73,64 +73,64 @@
         </div>
       </div>
       <!-- modal -->
-        <div class="modal fade" id="userUpdateModal" tabindex="-1" aria-labelledby="userUpdateModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title fw-bold" id="userUpdateModalLabel">사용자 {{userPopTitle}}</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body text-start">
-                <form>
-                  <div class="mb-3">
-                      <label for="id-text" class="col-form-label">아이디:</label>
-                      <input type="text" class="form-control" v-model="userData.id" id="id-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="name-text" class="col-form-label">이름:</label>
-                      <input type="text" class="form-control" v-model="userData.name" id="name-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="company-text" class="col-form-label">소속:</label>
-                      <input type="text" class="form-control" v-model="userData.company" id="company-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">전화:</label>
-                      <input type="text" class="form-control" v-model="userData.telephone" id="telephone-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="auth-text" class="col-form-label">권한:</label>
-                      <select class="form-select" v-model="userData.auth" id="auth-text">
-                        <option selected value="관리자">관리자</option>
-                        <option value="사용자">사용자</option>
-                      </select>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <label for="passward-text" class="col-form-label">비밀번호:</label>
-                      <div class="row">
-                        <div class="col-8">
-                          <input :disabled="validated == 1" type="text" class="form-control" id="passward-text">
-                        </div>
-                        <div class="form-check col-4">
-                          <input class="form-check-input" type="checkbox" @click="pwCheck" id="flexCheckDefault">
-                          <label class="form-check-label" for="flexCheckDefault">
-                              비밀번호 설정
-                          </label>
-                        </div>
+      <div class="modal fade" id="userUpdateModal" tabindex="-1" aria-labelledby="userUpdateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="userUpdateModalLabel">사용자 {{userPopTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+              <form>
+                <div class="mb-3">
+                    <label for="id-text" class="col-form-label">아이디:</label>
+                    <input type="text" class="form-control" v-model="userData.id" id="id-text">
+                </div>
+                <div class="mb-3">
+                    <label for="name-text" class="col-form-label">이름:</label>
+                    <input type="text" class="form-control" v-model="userData.name" id="name-text">
+                </div>
+                <div class="mb-3">
+                    <label for="company-text" class="col-form-label">소속:</label>
+                    <input type="text" class="form-control" v-model="userData.company" id="company-text">
+                </div>
+                <div class="mb-3">
+                    <label for="telephone-text" class="col-form-label">전화:</label>
+                    <input type="text" class="form-control" v-model="userData.telephone" id="telephone-text">
+                </div>
+                <div class="mb-3">
+                    <label for="auth-text" class="col-form-label">권한:</label>
+                    <select class="form-select" v-model="userData.auth" id="auth-text">
+                      <option selected value="관리자">관리자</option>
+                      <option value="사용자">사용자</option>
+                    </select>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label for="passward-text" class="col-form-label">비밀번호:</label>
+                    <div class="row">
+                      <div class="col-8">
+                        <input :disabled="validated == 1" type="text" class="form-control" id="passward-text">
+                      </div>
+                      <div class="form-check col-4">
+                        <input class="form-check-input" type="checkbox" @click="pwCheck" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            비밀번호 설정
+                        </label>
                       </div>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                  <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
-                  <button v-if="userPopUorR == true" type="button" @click="clickInsert" class="btn btn-primary">등록</button>
-                  <button v-else type="button" class="btn btn-primary" @click="clickUpdate">수정</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal" id="btnClose">닫기</button>
-              </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
+                <button v-if="userPopUorR == true" type="button" @click="clickInsert" class="btn btn-primary">등록</button>
+                <button v-else type="button" class="btn btn-primary" @click="clickUpdate">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal" id="btnClose">닫기</button>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

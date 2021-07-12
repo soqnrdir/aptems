@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
 
 import Powerconsumption from '../views/energyMonitering/Powerconsumption.vue'
 import LiveLoadMonitering from '../views/energyMonitering/LiveLoadMonitering.vue'
@@ -32,6 +33,12 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+
   // 에너지모니터링
   {
     path: '/powerconsumption',

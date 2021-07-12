@@ -69,6 +69,9 @@
               </ul>
             </li>
         </ul>
+        <div  class="ms-auto">
+          <router-link class="nav-link" to="/login">로그인</router-link>
+        </div>
       </div>
     </div>
   </nav>
