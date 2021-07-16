@@ -14,7 +14,7 @@
             </div>
             <button type="button" class="btn btn-info text-white" style="flex-basis:60px;" @click="clickSearch">검색</button>
             <button type="button" class="btn btn-info text-white ms-auto" style="flex-basis:90px;" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">비용등록</button>
-            <button type="button" class="btn btn-info text-white ms-3 me-3" style="flex-basis:130px;">엑세파일저장</button>
+            <button type="button" class="btn btn-info text-white ms-3 me-3" style="flex-basis:130px;">엑셀파일저장</button>
           </div>
           <div class="row">
               <table class="table">

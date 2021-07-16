@@ -2,7 +2,7 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="flex-basis: 300px">
     <div class="container-fluid">
-        <router-link @click ="changeColor()" to="/"><img src="../img/mainLogo.png" class="img-fluid" alt="..."></router-link>
+        <router-link @click ="changeColor()" to="/home"><img src="../img/mainLogo.png" class="img-fluid" alt="..."></router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,8 +56,8 @@
               <ul class="dropdown-menu"  aria-labelledby="navbarEnvironmentInfo">
                 <li><router-link class="nav-link" to="/environmentDataHistory">환경데이터이력</router-link></li>
                 <li><router-link class="nav-link" to="/waterQualityMonitoring">수질모니터링</router-link></li>
-                <li><router-link class="nav-link" to="/waterQualityAlarmHistory">수질경보이력</router-link></li>
-              </ul>
+                  <li><router-link class="nav-link" to="/waterQualityAlarmHistory">수질경보이력</router-link></li>
+                </ul>
             </li>
             <li class="nav-item dropdown ms-3" >
               <a class="nav-link dropdown-toggle" @click ="changeColor(6)" :style="{ color: textColor6, backgroundColor: bgColor6 }"  href="#" id="navbarSystem" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,7 +70,7 @@
             </li>
         </ul>
         <div  class="ms-auto">
-          <router-link class="nav-link" to="/login">로그인</router-link>
+          <router-link class="nav-link" to="/">로그인</router-link>
         </div>
       </div>
     </div>

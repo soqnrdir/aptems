@@ -30,13 +30,13 @@ const routes = [
   // 공통
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
 
   // 에너지모니터링
