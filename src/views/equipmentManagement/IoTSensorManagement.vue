@@ -1,48 +1,48 @@
 <template>
-<div class="container">
+<div class="container" @mousedown="closeToast">
   <div class="row">
     <div class="col-md-12">
       <h5 class="fw-bold text-start">IoT센서 관리</h5>
       <div class="card mt-5">
         <div class="card-body">
           <div class="row">
-        <div class="text-end">
-          <button type="button" class="btn btn-info btn-fill text-white" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
-            IoT센서등록
-          </button>
-        </div>
-      </div>
-          <div class="row">
-              <table class="table">
-                <colgroup>
-                  <col width = "14%">
-                  <col width = "14%">
-                  <col width = "14%">
-                  <col width = "14%">
-                  <col width = "14%">
-                  <col />
-                </colgroup>
-                  <thead>
-                      <tr>
-                      <th v-for="column in table.columns" :key="column">{{column}}</th>
-                      </tr>
-                  </thead>
-                  <tbody v-if="table.data.length != 0">
-                    <tr v-for="(item, index) in paginatedData" :key="index" >
-                      <td>{{item.sensorType}}</td>
-                      <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.sensorNm}}</td>
-                      <td>{{item.emplacement}}</td>
-                      <td>{{item.regDate}}</td>
-                      <td>{{item.ipAdd}}</td>
-                      <td>{{item.etc}}</td>
-                    </tr>
-                  </tbody>
-                  <tbody v-if="table.data.length == 0">
-                    <tr>
-                      <td colspan="8">데이터가 존재하지 않습니다.</td>
-                    </tr>
-                  </tbody>
-              </table>
+            <div class="text-end">
+              <button type="button" class="btn btn-info btn-fill text-white" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
+                IoT센서등록
+              </button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <table class="table">
+              <colgroup>
+                <col width = "14%">
+                <col width = "14%">
+                <col width = "14%">
+                <col width = "14%">
+                <col width = "14%">
+                <col />
+              </colgroup>
+              <thead>
+                  <tr>
+                  <th v-for="column in table.columns" :key="column">{{column}}</th>
+                  </tr>
+              </thead>
+              <tbody v-if="table.data.length != 0">
+                <tr v-for="(item, index) in paginatedData" :key="index" >
+                  <td>{{item.sensorType}}</td>
+                  <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.sensorNm}}</td>
+                  <td>{{item.emplacement}}</td>
+                  <td>{{item.regDate}}</td>
+                  <td>{{item.ipAdd}}</td>
+                  <td>{{item.etc}}</td>
+                </tr>
+              </tbody>
+              <tbody v-if="table.data.length == 0">
+                <tr>
+                  <td colspan="8">데이터가 존재하지 않습니다.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="row" v-if="table.data.length != 0">
             <nav aria-label="Page navigation example" class="d-flex flex-row-reverse bd-highlight">
@@ -68,45 +68,83 @@
         </div>
       </div>
       <!-- modal -->
-        <div class="modal fade" id="userUpdateModal" tabindex="-1" aria-labelledby="userUpdateModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title fw-bold" id="userUpdateModalLabel">IoT 센서 {{userPopTitle}}</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
+      <div class="modal fade" id="userUpdateModal" tabindex="-1" aria-labelledby="userUpdateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="userUpdateModalLabel">IoT 센서 {{userPopTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="row g-3 needs-validation" novalidate @submit="clickSubmit" onsubmit="return false">
               <div class="modal-body text-start">
-                <form>
-                  <div class="mb-3">
-                      <label for="id-text" class="col-form-label">센서종류:</label>
-                      <input type="text" class="form-control" v-model="userData.sensorType" id="id-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="name-text" class="col-form-label">센서명:</label>
-                      <input type="text" class="form-control" v-model="userData.sensorNm" id="name-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="company-text" class="col-form-label">설치위치:</label>
-                      <input type="text" class="form-control" v-model="userData.emplacement" id="company-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">IP주소:</label>
-                      <input type="text" class="form-control" v-model="userData.ipAdd" id="telephone-text">
-                  </div>
-                  <div class="mb-3">
-                      <label for="telephone-text" class="col-form-label">비고:</label>
-                      <input type="text" class="form-control" v-model="userData.etc" id="telephone-text">
-                  </div>
-                </form>
+                <div class="mb-3">
+                    <label for="sensorType-text" class="col-form-label">센서종류:</label>
+                    <input type="text" class="form-control" v-model="userData.sensorType" id="sensorType-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      센서종류를 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sensorNm-text" class="col-form-label">센서명:</label>
+                    <input type="text" class="form-control" v-model="userData.sensorNm" id="sensorNm-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      센서명을 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="emplacement-text" class="col-form-label">설치위치:</label>
+                    <input type="text" class="form-control" v-model="userData.emplacement" id="emplacement-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      설치위치를 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="ipAdd-text" class="col-form-label">IP주소:</label>
+                    <input type="text" class="form-control" v-model="userData.ipAdd" id="ipAdd-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      IP주소를 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="etc-text" class="col-form-label">비고:</label>
+                    <input type="text" class="form-control" v-model="userData.etc" id="etc-text" autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
+                    <button v-if="userPopUorR == true" type="sumbit" class="btn btn-primary">등록</button>
+                    <button v-else type="sumbit" class="btn btn-primary">수정</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal">닫기</button>
+                </div>
               </div>
-              <div class="modal-footer">
-                  <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
-                  <button v-if="userPopUorR == true" type="button" @click="clickInsert" class="btn btn-primary">등록</button>
-                  <button v-else type="button" class="btn btn-primary" @click="clickUpdate">수정</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal" id="btnClose">닫기</button>
-              </div>
+            </form>
+          </div>
+        </div>
+        <div class="toast-container position-absolute top-0 end-0 p-3">
+          <div class="toast" :class="display2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto">IoT센서 삭제</strong>
+              <button type="button" class="btn-close" @click="closeDelete" ></button>
+            </div>
+            <div class="toast-body text-start">
+              삭제하시겠습니까?
+            </div>
+            <div class="text-end">
+              <button  type="button" class="btn btn-danger mb-2" @click="deleteToast">확인</button>
+              <button type="button" class="btn btn-secondary ms-2 mb-2 me-2" @click="closeDelete">닫기</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="toast-container position-absolute top-0 end-0 p-3">
+        <div class="toast" :class="display" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">IoT센서 {{toastStats}}</strong>
+            <button type="button" class="btn-close" @click="closeToast" ></button>
+          </div>
+          <div class="toast-body text-start">
+            {{toastStats}}되었습니다.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -114,7 +152,7 @@
 </template>
 
 <script>
-const tableColumns = ['센서종류', '센서명', '설치위치', '설치날짜', 'IP주소', '내용']
+const tableColumns = ['센서종류', '센서명', '설치위치', '설치날짜', 'IP주소', '비고']
 const tableData = [{
   sensorType: '온도센서',
   sensorNm: 'NS-TDSM1',
@@ -234,6 +272,9 @@ export default {
         }
         return list
       },
+      toastStats: '',
+      display: 'hide',
+      display2: 'hide',
       pageNum: 0,
       pageSize: 10,
       startIndex: 0,
@@ -265,6 +306,12 @@ export default {
     }
   },
   methods: {
+    closeDelete () {
+      this.display2 = 'hide'
+    },
+    closeToast () {
+      this.display = 'hide'
+    },
     prevPage () {
       if (this.pageDefaultNum1 !== 1) {
         this.activeOn1 = 'active'
@@ -402,9 +449,16 @@ export default {
       }
     },
     userPopR () {
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.classList.remove('was-validated')
+        })
+
       this.userPopTitle = '등록'
       this.validated = 1
       this.userPopUorR = true
+      this.display2 = 'hide'
 
       this.userData.sensorType = ''
       this.userData.sensorNm = ''
@@ -413,9 +467,16 @@ export default {
       this.userData.etc = ''
     },
     userPopU (item, index) {
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.classList.remove('was-validated')
+        })
+
       this.userPopTitle = '수정'
       this.validated = 1
       this.userPopUorR = false
+      this.display2 = 'hide'
 
       index = this.startIndex + index
       this.userData.index = index
@@ -425,138 +486,123 @@ export default {
       this.userData.ipAdd = item.ipAdd
       this.userData.etc = item.etc
     },
-    clickInsert () {
-      if (this.userData.sensorType == null || this.userData.sensorType === '') {
-        alert('센서종류를 입력해주세요.')
-        return
-      }
-      if (this.userData.sensorNm == null || this.userData.sensorNm === '') {
-        alert('센서명을 입력해주세요.')
-        return
-      }
-      if (this.userData.emplacement == null || this.userData.emplacement === '') {
-        alert('설치위치를 입력해주세요.')
-        return
-      }
-      if (this.userData.ipAdd == null || this.userData.ipAdd === '') {
-        alert('IP주소를 입력해주세요.')
-        return
-      }
-      if (this.userData.etc == null || this.userData.etc === '') {
-        alert('내용을 입력해주세요.')
-        return
-      }
-
-      var inserted = confirm('해당 항목을 등록하시겠습니까?')
-      if (inserted === true) {
-        const today = new Date()
-        const year = today.getFullYear() // 년도
-        let month = today.getMonth() + 1 // 월
-        if (month < 10) month = '0' + month
-        let date = today.getDate() // 날짜
-        if (date < 10) date = '0' + date
-
-        const nowsday = year + '-' + month + '-' + date
-
-        this.table.data.push({
-          sensorType: this.userData.sensorType,
-          sensorNm: this.userData.sensorNm,
-          emplacement: this.userData.emplacement,
-          regDate: nowsday,
-          ipAdd: this.userData.ipAdd,
-          etc: this.userData.etc
-        })
-        alert('등록되었습니다.')
-        this.$refs.closeModal.click()
-      }
-    },
-    clickUpdate () {
-      if (this.userData.sensorType == null || this.userData.sensorType === '') {
-        alert('센서종류를 입력해주세요.')
-        return
-      }
-      if (this.userData.sensorNm == null || this.userData.sensorNm === '') {
-        alert('센서명을 입력해주세요.')
-        return
-      }
-      if (this.userData.emplacement == null || this.userData.emplacement === '') {
-        alert('설치위치를 입력해주세요.')
-        return
-      }
-      if (this.userData.ipAdd == null || this.userData.ipAdd === '') {
-        alert('IP주소를 입력해주세요.')
-        return
-      }
-      if (this.userData.etc == null || this.userData.etc === '') {
-        alert('내용을 입력해주세요.')
-        return
-      }
-
-      var updated = confirm('해당 항목을 수정하시겠습니까?')
-      if (updated === true) {
-        this.table.data[this.userData.index].sensorType = this.userData.sensorType
-        this.table.data[this.userData.index].sensorNm = this.userData.sensorNm
-        this.table.data[this.userData.index].emplacement = this.userData.emplacement
-        this.table.data[this.userData.index].ipAdd = this.userData.ipAdd
-        this.table.data[this.userData.index].etc = this.userData.etc
-
-        alert('수정되었습니다.')
-        this.$refs.closeModal.click()
-      }
-    },
-    clickDelete () {
-      var deleted = confirm('해당 항목을 삭제하시겠습니까?')
-      if (deleted === true) {
-        this.table.data.splice(this.userData.index, 1)
-
-        alert('삭제되었습니다.')
-        this.$refs.closeModal.click()
-        let tableLen = this.table.data.length
-
-        this.activeOn1 = ''
-        this.activeOn2 = ''
-        this.activeOn3 = ''
-        this.activeOn4 = ''
-        this.activeOn5 = ''
-
-        if (this.pageNum !== 0) {
-          let paging = 1
-          if (tableLen > 10) {
-            paging = tableLen / 10
-            paging = parseInt(paging)
-            paging += 1
-            if (paging > 5) {
-              paging = paging % 5
-            }
-          }
-
-          let pageNum = 0
-          if (tableLen > 10) {
-            tableLen = tableLen / 10
-            tableLen = parseInt(tableLen)
-            pageNum += tableLen
-          }
-
-          this.pageNum = pageNum
-          this.startIndex = this.pageNum * this.pageSize
-          this.endIndex = this.startIndex + this.pageSize
-
-          if (paging === 1) {
-            this.activeOn1 = 'active'
-          } else if (paging === 2) {
-            this.activeOn2 = 'active'
-          } else if (paging === 3) {
-            this.activeOn3 = 'active'
-          } else if (paging === 4) {
-            this.activeOn4 = 'active'
-          } else {
-            this.activeOn5 = 'active'
-          }
+    clickSubmit () {
+      if (this.userData.sensorType !== '' && this.userData.sensorNm !== '' && this.userData.emplacement !== '' && this.userData.ipAdd !== '') {
+        if (this.userPopTitle === '등록') {
+          this.toastStats = '등록'
+          this.clickInsert()
         } else {
-          this.activeOn1 = 'active'
+          this.toastStats = '수정'
+          this.clickUpdate()
         }
       }
+    },
+    clickInsert () {
+      const moment = require('moment')
+      const today = moment()
+
+      const nowsday = today.format('YYYY-MM-DD')
+
+      this.table.data.push({
+        sensorType: this.userData.sensorType,
+        sensorNm: this.userData.sensorNm,
+        emplacement: this.userData.emplacement,
+        regDate: nowsday,
+        ipAdd: this.userData.ipAdd,
+        etc: this.userData.etc
+      })
+      this.display = 'show'
+      this.$refs.closeModal.click()
+    },
+    clickUpdate () {
+      this.table.data[this.userData.index].sensorType = this.userData.sensorType
+      this.table.data[this.userData.index].sensorNm = this.userData.sensorNm
+      this.table.data[this.userData.index].emplacement = this.userData.emplacement
+      this.table.data[this.userData.index].ipAdd = this.userData.ipAdd
+      this.table.data[this.userData.index].etc = this.userData.etc
+
+      this.display = 'show'
+      this.$refs.closeModal.click()
+    },
+    clickDelete () {
+      this.toastStats = '삭제'
+      this.display2 = 'show'
+    },
+    deleteToast () {
+      this.display2 = 'hide'
+      this.table.data.splice(this.userData.index, 1)
+
+      this.display = 'show'
+      this.$refs.closeModal.click()
+
+      let tableLen = this.table.data.length
+
+      this.activeOn1 = ''
+      this.activeOn2 = ''
+      this.activeOn3 = ''
+      this.activeOn4 = ''
+      this.activeOn5 = ''
+
+      if (this.pageNum !== 0) {
+        let paging = 1
+        if (tableLen > 10) {
+          paging = tableLen / 10
+          paging = parseInt(paging)
+          paging += 1
+          if (paging > 5) {
+            paging = paging % 5
+          }
+        }
+
+        let pageNum = 0
+        if (tableLen > 10) {
+          tableLen = tableLen / 10
+          tableLen = parseInt(tableLen)
+          pageNum += tableLen
+        }
+
+        this.pageNum = pageNum
+        this.startIndex = this.pageNum * this.pageSize
+        this.endIndex = this.startIndex + this.pageSize
+
+        if (paging === 1) {
+          this.activeOn1 = 'active'
+        } else if (paging === 2) {
+          this.activeOn2 = 'active'
+        } else if (paging === 3) {
+          this.activeOn3 = 'active'
+        } else if (paging === 4) {
+          this.activeOn4 = 'active'
+        } else {
+          this.activeOn5 = 'active'
+        }
+      } else {
+        this.activeOn1 = 'active'
+      }
     }
+  },
+  mounted () {
+    // 이벤트는 한번만 등록
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // array로 변환할 필요가 있을 경우
+    Array.prototype.slice.call(forms)
+    // 각 인수를 form으로 보는 반복문
+      .forEach(function (form) {
+        // 각 index를 submit 했을 때
+        form.addEventListener('submit', function (event) {
+          // 만약 채크가 되어있지 않다면
+          if (!form.checkValidity()) {
+            // submit 이벤트를 막고
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          // 그 결과를 UI로 나타낸다.
+          form.classList.add('was-validated')
+          // 자식부터 부모로 이벤트가 전파되는 것을 버블링(bubbling)이라고 한다. => false일 경우
+        }, false)
+      })
   },
   computed: {
     pageCount () {

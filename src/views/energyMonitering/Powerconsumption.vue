@@ -1,42 +1,42 @@
  <template>
   <div class="container">
     <div class="row">
-    <div class="col-md-12">
-      <h5 class="fw-bold text-start">설비별 전력 사용량</h5>
-      <div class="card mt-5">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-2">
-              <select class="form-select" id="auth-text">
-                <option selected value="지하주차장 조명">지하주차장 조명</option>
-                <option value="장소1">장소1</option>
-                <option value="장소2">장소2</option>
-              </select>
+      <div class="col-md-12">
+        <h5 class="fw-bold text-start">설비별 전력 사용량</h5>
+        <div class="card mt-5">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2">
+                <select class="form-select" id="auth-text">
+                  <option selected value="지하주차장 조명">지하주차장 조명</option>
+                  <option value="장소1">장소1</option>
+                  <option value="장소2">장소2</option>
+                </select>
+              </div>
+              <button type="button" class="border-0 bg-white nav-link" style="flex-basis:80px;" @click="updateChart">1일</button>
+              <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">1주일</button>
+              <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">3개월</button>
+              <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">1년</button>
+              <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">5년</button>
+              <button type="button" class="btn btn-info ms-auto me-3 text-white" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
             </div>
-            <button type="button" class="border-0 bg-white nav-link" style="flex-basis:80px;" @click="updateChart">1일</button>
-            <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">1주일</button>
-            <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">3개월</button>
-            <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">1년</button>
-            <button type="button" class="border-0 bg-white" style="flex-basis:80px;" @click="updateChart">5년</button>
-            <button type="button" class="btn btn-info ms-auto me-3 text-white" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-8">
-              <h5 class="fw-bold text-center">전력 사용량(kWh)</h5>
-              <vue3-chart-js
-                  :id="BarChart.id"
-                  ref="chartRef"
-                  :type="BarChart.type"
-                  :data="BarChart.data"
-                  :options="BarChart.options"
-                  @before-render="beforeRenderLogic"
-              ></vue3-chart-js>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <h5 class="fw-bold text-center">전력 사용량(kWh)</h5>
+                <vue3-chart-js
+                    :id="BarChart.id"
+                    ref="chartRef"
+                    :type="BarChart.type"
+                    :data="BarChart.data"
+                    :options="BarChart.options"
+                    @before-render="beforeRenderLogic"
+                ></vue3-chart-js>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>

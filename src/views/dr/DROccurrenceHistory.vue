@@ -8,14 +8,14 @@
           <div class="row">
             <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:120px">측정장소</h5>
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>&#8275;
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>
             <button type="button" class="btn btn-info text-white" style="flex-basis:60px;" @click="clickSearch">검색</button>
           </div>
-          <div class="row">
+          <div class="row mt-3">
             <table class="table">
               <colgroup>
                 <col width = "20%">
@@ -75,6 +75,7 @@
 
 <script>
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
 const tableColumns = ['일자', '시작시간', '종료시간', '감축률', '비고']
@@ -162,6 +163,7 @@ export default {
   },
   data () {
     return {
+      locale: ko,
       nowsday: ref(new Date()),
       table: {
         columns: [...tableColumns],

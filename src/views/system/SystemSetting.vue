@@ -44,7 +44,7 @@
               <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:170px">점검 기준일 : </h5>
               <div class="col-3">
                 <datepicker :disabled="dateDisabled" :style="{ backgroundColor: datebg }" class="form-control"
-                  v-model="nowsday"
+                  v-model="nowsday" :locale="locale"
                 />
               </div>
             </div>
@@ -74,6 +74,7 @@
 
 <script>
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
 export default {
@@ -82,6 +83,7 @@ export default {
   },
   data () {
     return {
+      locale: ko,
       // nowsday: ref(new Date()),
       nowsday: ref(new Date('2021-01-20')),
       // 데이터 변경 시 new Date('원하는 일자')

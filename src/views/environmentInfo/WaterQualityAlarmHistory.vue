@@ -5,7 +5,7 @@
       <h5 class="fw-bold text-start">수질 경보 이력</h5>
       <div class="card mt-5">
         <div class="card-body">
-          <div class="row">
+          <div class="row mt-3">
             <h5 class="col-1 fw-bold mt-2 text-end" style="flex-basis:120px">측정장소</h5>
             <div class="col-2">
               <select class="form-select" id="auth-text">
@@ -14,14 +14,14 @@
               </select>
             </div>
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div> ~
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>
             <button type="button" class="btn btn-info text-white" style="flex-basis:60px;" @click="clickSearch">검색</button>
           </div>
-          <div class="row">
+          <div class="row mt-3">
             <table class="table">
               <colgroup>
                 <col width = "20%">
@@ -81,6 +81,7 @@
 
 <script>
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
 const tableColumns = ['측정장소', 'PH', '염소', '탁도', '측정일시']
@@ -175,6 +176,7 @@ export default {
   },
   data () {
     return {
+      locale: ko,
       nowsday: ref(new Date()),
       table: {
         columns: [...tableColumns],

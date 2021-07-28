@@ -1,65 +1,65 @@
  <template>
   <div class="container">
     <div class="row">
-    <div class="col-md-12">
-      <h5 class="fw-bold text-start">DR 현황</h5>
-      <div class="card mt-5">
-        <div class="card-body">
-          <!-- <div class="row">
-            <button type="button" class="btn btn-info ms-auto me-3" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
-          </div> -->
-          <div class="row justify-content-center">
-            <div class="col-6">
-              <vue3-chart-js
-                  :id="LineChart.id"
-                  ref="chartRef"
-                  :type="LineChart.type"
-                  :data="LineChart.data"
-                  :options="LineChart.options"
-                  @before-render="beforeRenderLogic"
-              ></vue3-chart-js>
+      <div class="col-md-12">
+        <h5 class="fw-bold text-start">DR 현황</h5>
+        <div class="card mt-5">
+          <div class="card-body">
+            <!-- <div class="row">
+              <button type="button" class="btn btn-info ms-auto me-3" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
+            </div> -->
+            <div class="row justify-content-center">
+              <div class="col-6">
+                <vue3-chart-js
+                    :id="LineChart.id"
+                    ref="chartRef"
+                    :type="LineChart.type"
+                    :data="LineChart.data"
+                    :options="LineChart.options"
+                    @before-render="beforeRenderLogic"
+                ></vue3-chart-js>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <table class="table">
-              <colgroup>
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-                <col width = "12%">
-              </colgroup>
-              <thead>
-                  <tr>
-                  <th class="text-info" scope="col" v-for="column in table.columns" :key="column">{{column}}</th>
+            <div class="row">
+              <table class="table">
+                <colgroup>
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                  <col width = "12%">
+                </colgroup>
+                <thead>
+                    <tr>
+                    <th class="text-info" scope="col" v-for="column in table.columns" :key="column">{{column}}</th>
+                    </tr>
+                </thead>
+                <tbody v-if="table.data.length != 0">
+                  <tr v-for="(item, index) in paginatedData" :key="index" >
+                    <td>{{item.startTime}}</td>
+                    <td>{{item.endTime}}</td>
+                    <td>{{item.issuedCBL}}</td>
+                    <td>{{item.contractedCapacity}}</td>
+                    <td>{{item.orderReduction}}</td>
+                    <td>{{item.reductionGoal}}</td>
+                    <td>{{item.mensurationVal}}</td>
+                    <td>{{item.reduction}}</td>
                   </tr>
-              </thead>
-              <tbody v-if="table.data.length != 0">
-                <tr v-for="(item, index) in paginatedData" :key="index" >
-                  <td>{{item.startTime}}</td>
-                  <td>{{item.endTime}}</td>
-                  <td>{{item.issuedCBL}}</td>
-                  <td>{{item.contractedCapacity}}</td>
-                  <td>{{item.orderReduction}}</td>
-                  <td>{{item.reductionGoal}}</td>
-                  <td>{{item.mensurationVal}}</td>
-                  <td>{{item.reduction}}</td>
-                </tr>
-              </tbody>
-              <tbody v-if="table.data.length == 0">
-                <tr>
-                  <td colspan="3">데이터가 존재하지 않습니다.</td>
-                </tr>
-              </tbody>
-            </table>
+                </tbody>
+                <tbody v-if="table.data.length == 0">
+                  <tr>
+                    <td colspan="3">데이터가 존재하지 않습니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>

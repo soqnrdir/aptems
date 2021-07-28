@@ -14,14 +14,14 @@
               </select>
             </div>
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>&#8275;
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>
             <button type="button" class="btn btn-info text-white" style="flex-basis:60px;" @click="clickSearch">검색</button>
           </div>
-          <div class="row">
+          <div class="row mt-3">
             <table class="table">
               <colgroup>
                 <col width = "25%">
@@ -79,9 +79,10 @@
 
 <script>
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
-const tableColumns = ['일자', '계측기', '장소', '내용']
+const tableColumns = ['일자', '계측기', '장소', '비고']
 const tableData = [{
   measureDate: '2021-05-19 12:10:30',
   measureInstrument: '씨그널계측기',
@@ -155,6 +156,7 @@ export default {
   },
   data () {
     return {
+      locale: ko,
       nowsday: ref(new Date()),
       table: {
         columns: [...tableColumns],

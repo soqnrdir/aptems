@@ -7,7 +7,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-1">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker  class="form-control bg-white text-center" v-model="nowsday"  inputFormat='yyyy-MM' startingView='month' minimumView='month' :locale="locale"/>
             </div>
             <button type="button" class="btn btn-info ms-auto me-3 text-white" style="flex-basis:122px;" @click="updateChart">&#9636;데이터입력</button>
           </div>
@@ -42,6 +42,7 @@
 <script>
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
 export default {
@@ -52,7 +53,8 @@ export default {
   },
   data () {
     return {
-      nowsday: ref(new Date())
+      locale: ko,
+      nowsday: ref(new Date('2021-07'))
     }
   },
   setup () {

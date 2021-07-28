@@ -1,27 +1,27 @@
  <template>
   <div class="container">
     <div class="row">
-    <div class="col-md-12">
-      <h5 class="fw-bold text-start">실시간 부하 모니터링</h5>
-      <div class="card mt-5">
-        <div class="card-body">
-          <div class="row justify-content-center">
-            <div class="col-8">
-              <h5 class="fw-bold text-center">현재 사용량(kWh)</h5>
-              <vue3-chart-js
-                  :id="BarChart.id"
-                  ref="chartRef"
-                  :type="BarChart.type"
-                  :data="BarChart.data"
-                  :options="BarChart.options"
-                  @before-render="beforeRenderLogic"
-              ></vue3-chart-js>
+      <div class="col-md-12">
+        <h5 class="fw-bold text-start">실시간 부하 모니터링</h5>
+        <div class="card mt-5">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <h5 class="fw-bold text-center">현재 사용량(kWh)</h5>
+                <vue3-chart-js
+                    :id="BarChart.id"
+                    ref="chartRef"
+                    :type="BarChart.type"
+                    :data="BarChart.data"
+                    :options="BarChart.options"
+                    @before-render="beforeRenderLogic"
+                ></vue3-chart-js>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>

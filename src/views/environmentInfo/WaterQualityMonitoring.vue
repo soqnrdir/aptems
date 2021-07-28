@@ -13,7 +13,7 @@
               </select>
             </div>
             <div class="col-2">
-              <datepicker class="form-control bg-white" v-model="nowsday"/>
+              <datepicker class="form-control bg-white" v-model="nowsday" :locale="locale"/>
             </div>
             <button type="button" class="btn btn-info ms-auto me-3 text-white" style="flex-basis:110px;" @click="updateChart">&#8634;새로고침</button>
           </div>
@@ -39,6 +39,7 @@
 <script>
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
 import Datepicker from 'vue3-datepicker'
+import { ko } from 'date-fns/locale'
 import { ref } from 'vue'
 
 export default {
@@ -49,6 +50,7 @@ export default {
   },
   data () {
     return {
+      locale: ko,
       nowsday: ref(new Date())
     }
   },

@@ -1,42 +1,42 @@
 <template>
-<div class="container">
+<div class="container" @mousedown="closeToast">
   <div class="row">
     <div class="col-md-12">
       <h5 class="fw-bold text-start">사용자 관리</h5>
       <div class="card mt-5">
         <div class="card-body">
           <div class="row">
-        <div class="text-end">
-          <button type="button" class="btn btn-info btn-fill text-white" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
-            사용자등록
-          </button>
-        </div>
-      </div>
-          <div class="row">
-              <table class="table">
-                  <thead>
-                      <tr>
-                      <th v-for="column in table.columns" :key="column">{{column}}</th>
-                      </tr>
-                  </thead>
-                  <tbody v-if="table.data.length != 0">
-                    <tr v-for="(item, index) in paginatedData" :key="index" >
-                      <td>{{item.no}}</td>
-                      <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.id}}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.company}}</td>
-                      <td>{{item.telephone}}</td>
-                      <td>{{item.regDate}}</td>
-                      <td>{{item.loginDate}}</td>
-                      <td>{{item.auth}}</td>
-                    </tr>
-                  </tbody>
-                  <tbody v-if="table.data.length == 0">
-                    <tr>
-                      <td colspan="8">데이터가 존재하지 않습니다.</td>
-                    </tr>
-                  </tbody>
-              </table>
+            <div class="text-end">
+              <button type="button" class="btn btn-info btn-fill text-white" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopR">
+                사용자등록
+              </button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <table class="table">
+              <thead>
+                  <tr>
+                  <th v-for="column in table.columns" :key="column">{{column}}</th>
+                  </tr>
+              </thead>
+              <tbody v-if="table.data.length != 0">
+                <tr v-for="(item, index) in paginatedData" :key="index" >
+                  <td>{{item.no}}</td>
+                  <td style="color:#00BFFF;cursor:pointer" data-bs-toggle="modal" data-bs-target="#userUpdateModal" @click="userPopU(item, index)">{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.company}}</td>
+                  <td>{{item.telephone}}</td>
+                  <td>{{item.regDate}}</td>
+                  <td>{{item.loginDate}}</td>
+                  <td>{{item.auth}}</td>
+                </tr>
+              </tbody>
+              <tbody v-if="table.data.length == 0">
+                <tr>
+                  <td colspan="8">데이터가 존재하지 않습니다.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <!-- <div class="row">
               <div class="btn-cover text-end">
@@ -75,28 +75,40 @@
       <!-- modal -->
       <div class="modal fade" id="userUpdateModal" tabindex="-1" aria-labelledby="userUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+          <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fw-bold" id="userUpdateModalLabel">사용자 {{userPopTitle}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-start">
-              <form>
+            <form class="row g-3 needs-validation" novalidate @submit="clickSubmit" onsubmit="return false">
+              <div class="modal-body text-start">
                 <div class="mb-3">
                     <label for="id-text" class="col-form-label">아이디:</label>
-                    <input type="text" class="form-control" v-model="userData.id" id="id-text">
+                    <input type="text" class="form-control" v-model="userData.id" id="id-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      아이디를 입력해주세요.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="name-text" class="col-form-label">이름:</label>
-                    <input type="text" class="form-control" v-model="userData.name" id="name-text">
+                    <input type="text" class="form-control" v-model="userData.name" id="name-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      이름을 입력해주세요.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="company-text" class="col-form-label">소속:</label>
-                    <input type="text" class="form-control" v-model="userData.company" id="company-text">
+                    <input type="text" class="form-control" v-model="userData.company" id="company-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      소속을 입력해주세요.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="telephone-text" class="col-form-label">전화:</label>
-                    <input type="text" class="form-control" v-model="userData.telephone" id="telephone-text">
+                    <input type="text" class="form-control" v-model="userData.telephone" id="telephone-text" required autocomplete="off">
+                    <div class="invalid-feedback">
+                      전화를 입력해주세요.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="auth-text" class="col-form-label">권한:</label>
@@ -110,10 +122,10 @@
                     <label for="passward-text" class="col-form-label">비밀번호:</label>
                     <div class="row">
                       <div class="col-8">
-                        <input :disabled="validated == 1" type="text" class="form-control" id="passward-text">
+                        <input :disabled="validated == 1" v-model="password" type="text" class="form-control" id="passward-text" autocomplete="off">
                       </div>
                       <div class="form-check col-4">
-                        <input class="form-check-input" type="checkbox" @click="pwCheck" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" @click="pwCheck" id="flexCheckDefault" v-model="pwCheckRemove" >
                         <label class="form-check-label" for="flexCheckDefault">
                             비밀번호 설정
                         </label>
@@ -121,14 +133,40 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
+              <div class="modal-footer">
+                  <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
+                  <button v-if="userPopUorR == true" type="submit"  class="btn btn-primary">등록</button>
+                  <button v-else type="submit" class="btn btn-primary" >수정</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal">닫기</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="toast-container position-absolute top-0 end-0 p-3">
+          <div class="toast" :class="display2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto">사용자 삭제</strong>
+              <button type="button" class="btn-close" @click="closeDelete" ></button>
             </div>
-            <div class="modal-footer">
-                <button v-show="userPopUorR == false" type="button" @click="clickDelete" class="btn btn-danger">삭제</button>
-                <button v-if="userPopUorR == true" type="button" @click="clickInsert" class="btn btn-primary">등록</button>
-                <button v-else type="button" class="btn btn-primary" @click="clickUpdate">수정</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref="closeModal" id="btnClose">닫기</button>
+            <div class="toast-body text-start">
+              삭제하시겠습니까?
             </div>
+            <div class="text-end">
+              <button  type="button" class="btn btn-danger mb-2" @click="deleteToast">확인</button>
+              <button type="button" class="btn btn-secondary ms-2 mb-2 me-2" @click="closeDelete">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="toast-container position-absolute top-0 end-0 p-3">
+        <div class="toast" :class="display" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">사용자 {{toastStats}}</strong>
+            <button type="button" class="btn-close" @click="closeToast" ></button>
+          </div>
+          <div class="toast-body text-start">
+            {{toastStats}}되었습니다.
           </div>
         </div>
       </div>
@@ -253,6 +291,11 @@ const tableData = [{
 export default {
   data () {
     return {
+      toastStats: '',
+      display: 'hide',
+      display2: 'hide',
+      password: '',
+      pwCheckRemove: false,
       table: {
         columns: [...tableColumns],
         data: [...tableData]
@@ -306,6 +349,12 @@ export default {
     //   this.endIndex = this.startIndex + this.pageSize
     // },
     // 페이징은 추후에 다시 수정
+    closeDelete () {
+      this.display2 = 'hide'
+    },
+    closeToast () {
+      this.display = 'hide'
+    },
     prevPage () {
       if (this.pageDefaultNum1 !== 1) {
         this.activeOn1 = 'active'
@@ -437,15 +486,26 @@ export default {
     },
     pwCheck () {
       if (this.validated === 1) {
+        this.password = ''
         this.validated = 0
       } else {
+        this.password = ''
         this.validated = 1
       }
     },
     userPopR () {
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.classList.remove('was-validated')
+        })
+
       this.userPopTitle = '등록'
       this.validated = 1
       this.userPopUorR = true
+      this.pwCheckRemove = false
+      this.password = ''
+      this.display2 = 'hide'
 
       this.userData.id = ''
       this.userData.name = ''
@@ -454,9 +514,18 @@ export default {
       this.userData.auth = '관리자'
     },
     userPopU (item, index) {
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.classList.remove('was-validated')
+        })
+
       this.userPopTitle = '수정'
       this.validated = 1
       this.userPopUorR = false
+      this.pwCheckRemove = false
+      this.password = ''
+      this.display2 = 'hide'
 
       index = this.startIndex + index
       this.userData.index = index
@@ -466,101 +535,64 @@ export default {
       this.userData.telephone = item.telephone
       this.userData.auth = item.auth
     },
+    clickSubmit () {
+      if (this.userData.id !== '' && this.userData.name !== '' && this.userData.company !== '' && this.userData.telephone !== '') {
+        if (this.userPopTitle === '등록') {
+          this.toastStats = '등록'
+          this.clickInsert()
+        } else {
+          this.toastStats = '수정'
+          this.clickUpdate()
+        }
+      }
+    },
     clickInsert () {
-      if (this.userData.id == null || this.userData.id === '') {
-        alert('아이디를 입력해주세요.')
-        return
-      }
-      if (this.userData.name == null || this.userData.name === '') {
-        alert('이름을 입력해주세요.')
-        return
-      }
-      if (this.userData.company == null || this.userData.company === '') {
-        alert('소속을 입력해주세요.')
-        return
-      }
-      if (this.userData.telephone == null || this.userData.telephone === '') {
-        alert('전화번호를 입력해주세요.')
-        return
-      }
+      const moment = require('moment')
+      const today = moment()
 
-      var inserted = confirm('해당 항목을 등록하시겠습니까?')
-      if (inserted === true) {
-        const today = new Date()
-        const year = today.getFullYear() // 년도
-        let month = today.getMonth() + 1 // 월
-        if (month < 10) month = '0' + month
-        let date = today.getDate() // 날짜
-        if (date < 10) date = '0' + date
+      const nowsday = today.format('YYYY-MM-DD')
+      const nowstime = today.format('h:mm:ss')
 
-        let hours = today.getHours() // 시
-        if (hours < 10) hours = '0' + hours
-        let minutes = today.getMinutes() // 분
-        if (minutes < 10) minutes = '0' + minutes
-        let seconds = today.getSeconds() // 초
-        if (seconds < 10) seconds = '0' + seconds
-
-        const nowsday = year + '-' + month + '-' + date
-        const nowstime = hours + ':' + minutes + ':' + seconds
-
-        this.table.data.push({
-          no: this.table.data.length + 1,
-          id: this.userData.id,
-          name: this.userData.name,
-          company: this.userData.company,
-          telephone: this.userData.telephone,
-          regDate: nowsday,
-          loginDate: nowsday + ' ' + nowstime,
-          auth: this.userData.auth
-        })
-        alert('등록되었습니다.')
-        this.$refs.closeModal.click()
-      }
+      this.table.data.push({
+        no: this.table.data.length + 1,
+        id: this.userData.id,
+        name: this.userData.name,
+        company: this.userData.company,
+        telephone: this.userData.telephone,
+        regDate: nowsday,
+        loginDate: nowsday + ' ' + nowstime,
+        auth: this.userData.auth
+      })
+      this.display = 'show'
+      this.$refs.closeModal.click()
     },
     clickUpdate () {
-      if (this.userData.id == null || this.userData.id === '') {
-        alert('아이디를 입력해주세요.')
-        return
-      }
-      if (this.userData.name == null || this.userData.name === '') {
-        alert('이름을 입력해주세요.')
-        return
-      }
-      if (this.userData.company == null || this.userData.company === '') {
-        alert('소속을 입력해주세요.')
-        return
-      }
-      if (this.userData.telephone == null || this.userData.telephone === '') {
-        alert('전화번호를 입력해주세요.')
-        return
-      }
+      this.table.data[this.userData.index].id = this.userData.id
+      this.table.data[this.userData.index].name = this.userData.name
+      this.table.data[this.userData.index].company = this.userData.company
+      this.table.data[this.userData.index].telephone = this.userData.telephone
+      this.table.data[this.userData.index].auth = this.userData.auth
 
-      var updated = confirm('해당 항목을 수정하시겠습니까?')
-      if (updated === true) {
-        this.table.data[this.userData.index].id = this.userData.id
-        this.table.data[this.userData.index].name = this.userData.name
-        this.table.data[this.userData.index].company = this.userData.company
-        this.table.data[this.userData.index].telephone = this.userData.telephone
-        this.table.data[this.userData.index].auth = this.userData.auth
-
-        alert('수정되었습니다.')
-        this.$refs.closeModal.click()
-      }
+      this.display = 'show'
+      this.$refs.closeModal.click()
     },
     clickDelete () {
-      var deleted = confirm('해당 항목을 삭제하시겠습니까?')
-      if (deleted === true) {
-        var nowindex = this.userData.index
+      this.toastStats = '삭제'
+      this.display2 = 'show'
+    },
+    deleteToast () {
+      this.display2 = 'hide'
+      var nowindex = this.userData.index
 
-        this.table.data.splice(this.userData.index, 1)
+      this.table.data.splice(this.userData.index, 1)
 
-        var arr = []
-        for (;nowindex < this.table.data.length; nowindex++) {
-          arr.push(nowindex)
+      var arr = []
+      for (;nowindex < this.table.data.length; nowindex++) {
+        arr.push(nowindex)
 
-          this.table.data[nowindex].no = nowindex + 1
-        }
-        alert('삭제되었습니다.')
+        this.table.data[nowindex].no = nowindex + 1
+
+        this.display = 'show'
         this.$refs.closeModal.click()
         let tableLen = this.table.data.length
 
@@ -608,6 +640,28 @@ export default {
         }
       }
     }
+  },
+  mounted () {
+    // 이벤트는 한번만 등록
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // array로 변환할 필요가 있을 경우
+    Array.prototype.slice.call(forms)
+    // 각 인수를 form으로 보는 반복문
+      .forEach(function (form) {
+        // 각 index를 submit 했을 때
+        form.addEventListener('submit', function (event) {
+          // 만약 채크가 되어있지 않다면
+          if (!form.checkValidity()) {
+            // submit 이벤트를 막고
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          // 그 결과를 UI로 나타낸다.
+          form.classList.add('was-validated')
+          // 자식부터 부모로 이벤트가 전파되는 것을 버블링(bubbling)이라고 한다. => false일 경우
+        }, false)
+      })
   },
   computed: {
     pageCount () {

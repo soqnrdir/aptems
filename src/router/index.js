@@ -6,7 +6,6 @@ import Powerconsumption from '../views/energyMonitering/Powerconsumption.vue'
 import LiveLoadMonitering from '../views/energyMonitering/LiveLoadMonitering.vue'
 import ElectricityUsage from '../views/energyMonitering/ElectricityUsage.vue'
 import EnergyCostMonth from '../views/energyMonitering/EnergyCostMonth.vue'
-import FacilityControl from '../views/energyMonitering/FacilityControl.vue'
 
 import EnergyUseStatistics from '../views/statisticsReport/EnergyUseStatistics.vue'
 import PowerUseHistory from '../views/statisticsReport/PowerUseHistory.vue'
@@ -59,11 +58,6 @@ const routes = [
     path: '/energyCostMonth',
     name: 'EnergyCostMonth',
     component: EnergyCostMonth
-  },
-  {
-    path: '/facilityControl',
-    name: 'FacilityControl',
-    component: FacilityControl
   },
   // 통계리포트
   {

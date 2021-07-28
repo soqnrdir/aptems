@@ -14,12 +14,14 @@
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^3.4.0",
     "core-js": "^3.6.5",
+    "date-fns": "^2.23.0",
     "jquery": "^3.2.1",
     "moment": "^2.29.1",
     "vue": "^3.1.4",
+    "vue-month-picker": "^1.5.0",
     "vue-monthly-picker": "^0.2.8",
     "vue-router": "^4.0.0-0",
-    "vue3-datepicker": "^0.2.4",
+    "vue3-datepicker": "^0.2.5",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
